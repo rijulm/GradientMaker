@@ -11,12 +11,28 @@ DIR = '/Volumes/GoogleDrive/My Drive/CS Projects/GradientMaker/Edits'
 total_images = (len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))]))
 
 # set the dimensions of the final product you want
-length = 21
-height = 10
+final_width = 21
+final_height = 10
 
 # to open the base gradient image and read its values as RGB
-
-
+image = cv2.imread("/Volumes/GoogleDrive/My Drive/CS Projects/GradientMaker/Base.jpg") # base is 480x270
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+height = image.shape[0] # 270
+width = image.shape[1] # 480
+height_increment = int(height / final_height)
+width_increment = int(width / final_width)
+colour_goals = [[0 for x in range(final_width)] for y in range(final_height)]
+x = 0
+y = 0
+print(height_increment, width_increment)
+for i in range(final_height):
+    x = height_increment * i
+    for j in range(final_width):
+        y = width_increment * j
+        # print("i = {}, j = {}".format(i,j))
+        # print("x = {}, y = {}".format(x,y))
+        colour_goals[i][j] = image[x, y]
+print(colour_goals[5][7])
 
 
 
